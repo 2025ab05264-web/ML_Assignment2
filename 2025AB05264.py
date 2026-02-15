@@ -43,7 +43,7 @@ models = {
     "kNN" : KNeighborsClassifier(),
     "Naive Bayes" : GaussianNB(),
     "Random Forest (Ensemble)": RandomForestClassifier(random_state=42),
-    "XGBoost (Ensemble)" : XGBClassifier(eval_error_metric='logloss', random_state=42)
+    "XGBoost (Ensemble)" : XGBClassifier(eval_metric='logloss', random_state=42)
 }
 
 results = []
@@ -61,7 +61,7 @@ for name, model in models.items():
         "F1" : round(f1_score(y_test, y_pred),4),
         "MCC" : round(matthews_corrcoef(y_test, y_pred),4)
     })
-    clean_name = name.replace(" ", "_").lower().replace("","").replace(")","")
+    clean_name = name.replace(" ", "_").lower().replace("(","").replace(")","")
     joblib.dump(model, f'model/{clean_name}.pkl')
     print(f"Saved {name} to model /{name}.pkl")
 
