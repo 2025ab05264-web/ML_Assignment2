@@ -61,9 +61,9 @@ for name, model in models.items():
         "F1" : round(f1_score(y_test, y_pred),4),
         "MCC" : round(matthews_corrcoef(y_test, y_pred),4)
     })
-
-    joblib.dump((model, f'model/{name}.pkl')
-  #  print(f"Saved {name} to model /{name}.pkl")
+    clean_name = name.replace(" ", "_").lower().replace("","").replace(")","")
+    joblib.dump(model, f'model/{clean_name}.pkl')
+    print(f"Saved {name} to model /{name}.pkl")
 
 
 
